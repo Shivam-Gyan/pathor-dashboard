@@ -1,44 +1,31 @@
-// context/ProductsContext.tsx
 "use client";
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
-import { getProducts } from "@/lib/api";
+import { createContext, useContext, useState, ReactNode } from "react";
+import { Product } from "@/types/product";
 
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  image: string;
-  category: string;
-  description?: string;
-};
-
-const ProductsContext = createContext<{
+interface ProductContextType {
   products: Product[];
-  addProduct: (p: Product) => void;
   setProducts: (p: Product[]) => void;
-} | null>(null);
+  addProduct: (p: Product) => void;
+}
 
-export function ProductsProvider({ children }: { children: ReactNode }) {
+const ProductContext = createContext<ProductContextType>({
+  products: [],
+  setProducts: () => {},
+  addProduct: () => {},
+});
+
+export function ProductProvider({ children }: { children: ReactNode }) {
   const [products, setProducts] = useState<Product[]>([]);
 
-  useEffect(() => {
-    // Load initial products from API
-    getProducts().then((data) => setProducts(data));
-  }, []);
-
   const addProduct = (p: Product) => {
-    setProducts((prev) => [p, ...prev]);
+    setProducts((prev) => [...prev, p]);
   };
 
   return (
-    <ProductsContext.Provider value={{ products, addProduct, setProducts }}>
+    <ProductContext.Provider value={{ products, setProducts, addProduct }}>
       {children}
-    </ProductsContext.Provider>
+    </ProductContext.Provider>
   );
 }
 
-export const useProducts = () => {
-  const ctx = useContext(ProductsContext);
-  if (!ctx) throw new Error("useProducts must be used inside ProductsProvider");
-  return ctx;
-};
+export const useProducts = () => useContext(ProductContext);

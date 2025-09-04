@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🛍️ Pathor Dashboard
 
-First, run the development server:
+A modern **e-commerce mini dashboard** built with **Next.js 15 (App Router)**, **TailwindCSS**, and **ShadCN UI**.
+It allows users to browse products, filter/search, view details, and manage a shopping cart with increment/decrement support.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## ✨ Features
+
+✅ **Product Dashboard**
+
+* Grid view of products
+* Search bar (real-time filter)
+* Category dropdown filter
+* Pagination with "Load More"
+
+✅ **Product Management**
+
+* Modal to **create new products**
+* Newly created products available immediately in dashboard & detail page
+
+✅ **Product Details**
+
+* Dedicated page for each product (`/product/[id]`)
+* Shows title, category, description, price
+* Related products section
+
+✅ **Cart Management**
+
+* Add items to cart from product card or detail page
+* Increment / decrement quantity
+* Remove items
+* Cart summary with total items & price
+
+✅ **Responsive UI**
+
+* Built with **TailwindCSS**
+* ShadCN UI components (Button, Card, Input, Dialog, DropdownMenu)
+* Fully responsive (mobile → desktop)
+
+---
+
+## 📂 Project Structure
+
+```
+/app
+ ├── layout.tsx            # Global layout with Navbar + Providers
+ ├── page.tsx              # Home page (hero + CTA)
+ ├── dashboard/page.tsx    # Product listing page
+ ├── product/[id]/page.tsx # Product detail page
+ ├── cart/page.tsx         # Cart page
+
+/components
+ ├── Navbar.tsx            # Top navigation bar with cart badge
+ ├── ProductCard.tsx       # Reusable card for products
+ ├── SearchBar.tsx         # Search input
+ ├── CategoryFilter.tsx    # Category dropdown
+ └── ui/                   # ShadCN UI components
+
+/context
+ ├── CartContext.tsx       # Manages cart state with reducer
+ └── ProductsContext.tsx   # Manages global products list
+
+/lib
+ └── api.ts                # Centralized API fetch calls
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Instructions to Run Locally
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Clone the repo**
 
-## Learn More
+   ```bash
+   git clone https://github.com/your-username/pathor-dashboard.git
+   cd pathor-dashboard
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Configure Next.js Images**
+   In `next.config.js`, we already allow external images from `fakestoreapi.com`.
+   Add other domains if needed.
 
-## Deploy on Vercel
+4. **Run the development server**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   Visit [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 📝 Additional Notes
+
+* **State Management:**
+
+  * Cart uses **Context + Reducer**
+  * Products use **Context (with fallback to API)**
+* **Styling:**
+
+  * TailwindCSS for layout + responsiveness
+  * ShadCN UI for consistent professional UI components
+* **Data Source:**
+
+  * Default products fetched from [Fake Store API](https://fakestoreapi.com/)
+  * New products are added to context state (can persist to localStorage if needed)
+
+

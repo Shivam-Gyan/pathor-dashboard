@@ -4,6 +4,11 @@
 A modern **e-commerce mini dashboard** built with **Next.js 15 (App Router)**, **TailwindCSS**, and **ShadCN UI**.
 It allows users to browse products, filter/search, view details, and manage a shopping cart with increment/decrement support.
 
+
+Visit the live demo at [https://pathor-dashboards.vercel.app](https://pathor-dashboards.netlify.app/)
+
+---
+
 ---
 
 ## ✨ Features
@@ -96,6 +101,10 @@ It allows users to browse products, filter/search, view details, and manage a sh
    Visit [http://localhost:3000](http://localhost:3000).
 
 ---
+
+* **Demo Video:**
+
+  * Watch the demo video [here](https://github.com/user-attachments/assets/6484ad4d-8848-47b5-9752-909e0db5e592)
 
 ## 📝 Additional Notes
 

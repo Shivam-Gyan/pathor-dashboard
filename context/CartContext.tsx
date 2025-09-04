@@ -10,18 +10,24 @@ interface CartState {
 
 type Action =
   | { type: "ADD"; product: Product }
-  | { type: "REMOVE"; id: number };
+  | { type: "REMOVE"; id: number }
+  | { type: "INCREMENT"; id: number }
+  | { type: "DECREMENT"; id: number };
 
 const CartContext = createContext<{
   state: CartState;
   addToCart: (product: Product) => void;
   removeFromCart: (id: number) => void;
+  incrementItem: (id: number) => void;
+  decrementItem: (id: number) => void;
   totalItems: number;
   totalPrice: number;
 }>({
   state: { items: [] },
   addToCart: () => {},
   removeFromCart: () => {},
+  incrementItem: () => {},
+  decrementItem: () => {},
   totalItems: 0,
   totalPrice: 0,
 });
@@ -43,6 +49,20 @@ function cartReducer(state: CartState, action: Action): CartState {
     }
     case "REMOVE":
       return { items: state.items.filter((i) => i.id !== action.id) };
+    case "INCREMENT":
+      return {
+        items: state.items.map((i) =>
+          i.id === action.id ? { ...i, quantity: i.quantity + 1 } : i
+        ),
+      };
+    case "DECREMENT":
+      return {
+        items: state.items
+          .map((i) =>
+            i.id === action.id ? { ...i, quantity: i.quantity - 1 } : i
+          )
+          .filter((i) => i.quantity > 0), // remove if quantity hits 0
+      };
     default:
       return state;
   }
@@ -51,10 +71,10 @@ function cartReducer(state: CartState, action: Action): CartState {
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, { items: [] });
 
-  const addToCart = (product: Product) =>
-    dispatch({ type: "ADD", product });
-  const removeFromCart = (id: number) =>
-    dispatch({ type: "REMOVE", id });
+  const addToCart = (product: Product) => dispatch({ type: "ADD", product });
+  const removeFromCart = (id: number) => dispatch({ type: "REMOVE", id });
+  const incrementItem = (id: number) => dispatch({ type: "INCREMENT", id });
+  const decrementItem = (id: number) => dispatch({ type: "DECREMENT", id });
 
   const totalItems = state.items.reduce(
     (acc, item) => acc + item.quantity,
@@ -67,7 +87,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   return (
     <CartContext.Provider
-      value={{ state, addToCart, removeFromCart, totalItems, totalPrice }}
+      value={{
+        state,
+        addToCart,
+        removeFromCart,
+        incrementItem,
+        decrementItem,
+        totalItems,
+        totalPrice,
+      }}
     >
       {children}
     </CartContext.Provider>

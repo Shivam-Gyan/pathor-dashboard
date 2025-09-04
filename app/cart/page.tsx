@@ -30,7 +30,7 @@ export default function CartPage() {
           {items.map((item) => (
             <li
               key={item.id}
-              className="flex items-center justify-between py-4"
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-4"
             >
               {/* Product Info */}
               <div className="flex items-center gap-4">
@@ -73,16 +73,18 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* Remove Button */}
-              <Button
-                variant="destructive"
-                size="sm"
-                className="flex items-center gap-2"
-                onClick={() => removeFromCart(item.id)}
-              >
-                <Trash2 className="h-4 w-4" />
-                Remove
-              </Button>
+              {/* Remove Button - moves below on mobile */}
+              <div className="sm:self-end">
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  className="flex items-center gap-2 w-full sm:w-auto"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Remove
+                </Button>
+              </div>
             </li>
           ))}
         </ul>

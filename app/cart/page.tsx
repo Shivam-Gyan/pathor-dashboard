@@ -2,6 +2,7 @@
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
 import { Trash2, Plus, Minus } from "lucide-react";
+import Image from "next/image";
 
 export default function CartPage() {
   const { state, removeFromCart, incrementItem, decrementItem, totalItems, totalPrice } =
@@ -34,10 +35,12 @@ export default function CartPage() {
             >
               {/* Product Info */}
               <div className="flex items-center gap-4">
-                <img
+                <Image
                   src={item.image}
                   alt={item.title}
-                  className="h-20 w-20 object-contain rounded-md border p-2 bg-gray-50"
+                  width={80}
+                  height={80}
+                  className="object-contain rounded-md border p-2 bg-gray-50"
                 />
                 <div className="flex flex-col">
                   {/* Title */}

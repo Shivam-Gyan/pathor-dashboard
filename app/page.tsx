@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function HomePage() {
@@ -23,9 +24,11 @@ export default function HomePage() {
 
       {/* Right Section - Illustration */}
       <div className="mt-10 lg:mt-0">
-        <img
+        <Image
           src="https://img.pikbest.com/png-images/20191028/push-shopping-cart-to-woman-gif_2515298.png!c1024wm0"
           alt="Shopping Lady with Cart"
+          width={320}
+          height={320}
           className="w-80 lg:w-[28rem] object-contain drop-shadow-lg"
         />
       </div>

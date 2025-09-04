@@ -3,6 +3,12 @@ import Navbar from "@/components/Navbar";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { ProductsProvider } from "@/context/ProductContext";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pathor Dashboard",
+  description: "A dashboard for managing your Pathor products",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

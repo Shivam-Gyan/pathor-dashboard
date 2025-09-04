@@ -12,14 +12,14 @@ export default function Navbar() {
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo / Brand */}
         <Link href="/" className="text-2xl font-bold text-slate-800">
-          🛍️ Pathor Dashboard
+          🛍️ <span className="max-sm:hidden">Pathor Dashboard</span>
         </Link>
 
         {/* Right side: Dashboard + Cart */}
         <div className="flex items-center gap-6">
           {/* Dashboard Button */}
           <Link href="/dashboard">
-            <Button variant="outline" className="rounded-lg">
+            <Button variant="outline" className="rounded-lg bg-slate-900 text-white hover:bg-slate-700 cursor-pointer hover:text-white">
               Dashboard
             </Button>
           </Link>
